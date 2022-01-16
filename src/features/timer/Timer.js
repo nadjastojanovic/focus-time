@@ -7,10 +7,12 @@ import { ProgressBar } from 'react-native-paper';
 import { Timing } from './Timing';
 import { useKeepAwake } from 'expo-keep-awake';
 
+const DEFAULT_TIME = 20;
+
 export const Timer = ({ focusSubject, onTimerEnd, clearSubject }) => {
   useKeepAwake();
 
-  const [minutes, setMinutes] = useState(0.1);
+  const [minutes, setMinutes] = useState(DEFAULT_TIME);
 
   const [isStarted, setIsStarted] = useState(false);
 
@@ -23,14 +25,14 @@ export const Timer = ({ focusSubject, onTimerEnd, clearSubject }) => {
   const vibrate = () => {
     if (Platform.OS === 'ios') {
       const interval = setInterval(() => Vibration.vibrate(), 1000);
-      setTimeout(() => clearInterval(interval), 10000);
+      setTimeout(() => clearInterval(interval), 2000);
     } else {
-      Vibration.vibrate(10000);
+      Vibration.vibrate(2000);
     }
   };
 
   const onEnd = () => {
-    setMinutes(0.1);
+    setMinutes(DEFAULT_TIME);
     setProgress(1);
     setIsStarted(false);
     vibrate();
