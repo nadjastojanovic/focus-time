@@ -29,6 +29,6 @@ const styles = (size) =>
     },
     text: {
       color: colors.yellow,
-      fontSize: size / 3,
+      fontSize: size / 4,
     },
   });
