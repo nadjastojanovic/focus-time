@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, StyleSheet, FlatList, Text, SafeAreaView } from 'react-native';
+
 import { RoundedButton } from '../../components/RoundedButton';
 import { colors } from '../../utils/colors';
 
@@ -19,7 +20,7 @@ export const FocusHistory = ({ focusHistory, onClear }) => {
           <>
             <Text style={styles.title}>Things we've focused on</Text>
             <FlatList
-              style={{ width: '100%', height: '100%' }}
+              style={{ flex: 1 }}
               contentContainerStyle={{ flex: 1, alignItems: 'center' }}
               data={focusHistory}
               renderItem={HistoryItem}

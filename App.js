@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, Platform } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 import { Focus } from './src/features/focus/Focus';
-import { colors } from './src/utils/colors';
 import { Timer } from './src/features/timer/Timer';
 import { FocusHistory } from './src/features/focus/FocusHistory';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+
+import { colors } from './src/utils/colors';
 
 const STATUSES = {
   COMPLETE: 1,
@@ -16,7 +18,10 @@ export default function App() {
   const [focusHistory, setFocusHistory] = useState([]);
 
   const addFocusHistorySubjectWithStatus = (subject, status) => {
-    setFocusHistory([...focusHistory, { key: String(focusHistory.length + 1), subject, status }]);
+    setFocusHistory([
+      ...focusHistory,
+      { key: String(focusHistory.length + 1), subject, status },
+    ]);
   };
 
   const onClear = () => {
@@ -29,26 +34,26 @@ export default function App() {
     } catch (e) {
       console.log(e);
     }
-  }
+  };
 
   const loadFocusHistory = async () => {
     try {
       const history = await AsyncStorage.getItem('focusHistory');
-      if (history && JSON.parse(history).length){
+      if (history && JSON.parse(history).length) {
         setFocusHistory(JSON.parse(history));
       }
     } catch (e) {
       console.log(e);
     }
-  }
+  };
 
   useEffect(() => {
     loadFocusHistory();
-  }, [])
+  }, []);
 
   useEffect(() => {
     saveFocusHistory();
-  }, [focusHistory])
+  }, [focusHistory]);
 
   return (
     <View style={styles.container}>
@@ -65,10 +70,10 @@ export default function App() {
           }}
         />
       ) : (
-        <>
+        <View style={{ flex: 1 }}>
           <Focus addSubject={setFocusSubject} />
-          <FocusHistory focusHistory={focusHistory} onClear={onClear}/>
-        </>
+          <FocusHistory focusHistory={focusHistory} onClear={onClear} />
+        </View>
       )}
     </View>
   );

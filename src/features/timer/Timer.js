@@ -1,16 +1,19 @@
 import React, { useState } from 'react';
-import { Countdown } from '../../components/Countdown';
 import { View, StyleSheet, Text, Vibration, Platform } from 'react-native';
-import { colors } from '../../utils/colors';
-import { RoundedButton } from '../../components/RoundedButton';
 import { ProgressBar } from 'react-native-paper';
-import { Timing } from './Timing';
 import { useKeepAwake } from 'expo-keep-awake';
 
-const DEFAULT_TIME = 20;
+import { Countdown } from '../../components/Countdown';
+import { RoundedButton } from '../../components/RoundedButton';
+import { Timing } from './Timing';
+import { colors } from '../../utils/colors';
+
+const DEFAULT_TIME = 0.1;
 
 export const Timer = ({ focusSubject, onTimerEnd, clearSubject }) => {
   useKeepAwake();
+
+  const interval = React.useRef(null);
 
   const [minutes, setMinutes] = useState(DEFAULT_TIME);
 
@@ -32,10 +35,10 @@ export const Timer = ({ focusSubject, onTimerEnd, clearSubject }) => {
   };
 
   const onEnd = () => {
+    vibrate();
     setMinutes(DEFAULT_TIME);
     setProgress(1);
     setIsStarted(false);
-    vibrate();
     onTimerEnd();
   };
 
@@ -59,11 +62,13 @@ export const Timer = ({ focusSubject, onTimerEnd, clearSubject }) => {
         <Text style={styles.title}>Focusing on:</Text>
         <Text style={styles.task}>{focusSubject}</Text>
       </View>
-      <ProgressBar
-        progress={progress}
-        color={colors.yellow}
-        style={{ height: 10, marginTop: 20 }}
-      />
+      <View style={{ paddingTop: 20 }}>
+        <ProgressBar
+          progress={progress}
+          color={colors.yellow}
+          style={{ height: 10 }}
+        />
+      </View>
       <View style={styles.buttonWrapper}>
         <Timing onChangeTime={changeTime} />
       </View>
