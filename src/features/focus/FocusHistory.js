@@ -5,7 +5,11 @@ import { RoundedButton } from '../../components/RoundedButton';
 import { colors } from '../../utils/colors';
 
 const HistoryItem = ({ item, index }) => {
-  return <Text style={styles.historyItem(item.status)}>{item.subject}</Text>;
+  return (
+    <Text style={{ color: item.status > 1 ? 'orangered' : 'yellowgreen' }}>
+      {item.subject}
+    </Text>
+  );
 };
 
 export const FocusHistory = ({ focusHistory, onClear }) => {
@@ -15,12 +19,12 @@ export const FocusHistory = ({ focusHistory, onClear }) => {
 
   return (
     <>
-      <SafeAreaView style={{ flex: 0.5, alignItems: 'center' }}>
+      <SafeAreaView style={{ alignItems: 'center' }}>
         {!!focusHistory.length && (
           <>
-            <Text style={styles.title}>Things we've focused on</Text>
+            <Text style={styles.title}>Things we've focused on ↓</Text>
             <FlatList
-              style={{ flex: 1 }}
+              style={{ marginBottom: 20 }}
               contentContainerStyle={{ flex: 1, alignItems: 'center' }}
               data={focusHistory}
               renderItem={HistoryItem}
@@ -40,11 +44,10 @@ export const FocusHistory = ({ focusHistory, onClear }) => {
 };
 
 const styles = StyleSheet.create({
-  historyItem: (status) => ({
-    color: status > 1 ? 'red' : 'green',
-  }),
   title: {
     color: colors.yellow,
+    fontWeight: 'bold',
+    marginBottom: 10,
   },
   clearContainer: {
     alignItems: 'center',

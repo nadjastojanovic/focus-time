@@ -1,7 +1,6 @@
 node_modules/
 .expo/
 dist/
-yarn.lock
 npm-debug.*
 *.jks
 *.p8

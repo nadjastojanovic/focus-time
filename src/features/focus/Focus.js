@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import React, { useState, useRef, useEffect } from 'react';
+import { View, Text, StyleSheet, Animated } from 'react-native';
 import { TextInput } from 'react-native-paper';
 
 import { RoundedButton } from '../../components/RoundedButton';
@@ -8,9 +8,19 @@ import { colors } from '../../utils/colors';
 
 export const Focus = ({ addSubject }) => {
   const [subject, setSubject] = useState(null);
+  const translation = useRef(new Animated.Value(0)).current;
+  useEffect(() => {
+    for (let i = 0; i < 125; i++) {
+      setTimeout(() => {
+        translation.setValue(i);
+      }, 10 * i);
+    }
+  }, []);
+
   return (
     <View style={styles.container}>
       <View style={styles.titleContainer}>
+        <Animated.Text style={[ styles.title, {transform: [{translateX: translation}]} ]}>Hi ✨</Animated.Text>
         <Text style={styles.title}>What would you like to focus on?</Text>
         <View style={styles.inputContainer}>
           <TextInput
@@ -37,7 +47,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   titleContainer: {
-    flex: 0.5,
+    flex: 0.4,
     padding: paddingSizes.md,
     justifyContent: 'center',
   },
@@ -45,6 +55,7 @@ const styles = StyleSheet.create({
     color: '#FFEBC6',
     fontWeight: 'bold',
     fontSize: fontSizes.xxl,
+    marginBottom: 10,
   },
   input: {
     backgroundColor: colors.yellow,
