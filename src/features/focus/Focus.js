@@ -8,19 +8,10 @@ import { colors } from '../../utils/colors';
 
 export const Focus = ({ addSubject }) => {
   const [subject, setSubject] = useState(null);
-  const translation = useRef(new Animated.Value(0)).current;
-  useEffect(() => {
-    for (let i = 0; i < 125; i++) {
-      setTimeout(() => {
-        translation.setValue(i);
-      }, 10 * i);
-    }
-  }, []);
 
   return (
     <View style={styles.container}>
       <View style={styles.titleContainer}>
-        <Animated.Text style={[ styles.title, {transform: [{translateX: translation}]} ]}>Hi ✨</Animated.Text>
         <Text style={styles.title}>What would you like to focus on?</Text>
         <View style={styles.inputContainer}>
           <TextInput
