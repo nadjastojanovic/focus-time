@@ -16,6 +16,6 @@ or type `https://snack.expo.dev/@nadjastojanov/focustime`
 
 ## ✨ To Be Added
 
-- Initial loading screen with Animated elements
+- Add a `react-native-paper` ActivityIndicator for `isLoading === true`
 - Percentage measure of progress above ProgressBar
 - Countdown for breaks inbetween work intervals
