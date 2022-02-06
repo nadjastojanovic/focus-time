@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   titleContainer: {
-    flex: 0.4,
+    flex: 0.8,
     padding: paddingSizes.md,
     justifyContent: 'center',
   },

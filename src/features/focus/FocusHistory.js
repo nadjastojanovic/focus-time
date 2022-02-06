@@ -6,7 +6,7 @@ import { colors } from '../../utils/colors';
 
 const HistoryItem = ({ item, index }) => {
   return (
-    <Text style={{ color: item.status > 1 ? 'orangered' : 'yellowgreen' }}>
+    <Text style={{ color: item.status > 1 ? 'indianred' : 'olivedrab', fontWeight: "bold", }}>
       {item.subject}
     </Text>
   );
@@ -19,10 +19,10 @@ export const FocusHistory = ({ focusHistory, onClear }) => {
 
   return (
     <>
-      <SafeAreaView style={{ alignItems: 'center' }}>
+      <SafeAreaView style={{ alignItems: 'center', flex: 1 }}>
         {!!focusHistory.length && (
           <>
-            <Text style={styles.title}>Things we've focused on ↓</Text>
+            <Text style={styles.title}>Things you've focused on ↓</Text>
             <FlatList
               style={{ marginBottom: 20 }}
               contentContainerStyle={{ flex: 1, alignItems: 'center' }}
